@@ -9,7 +9,31 @@
 </head>
 
 <body>
-    <h1>hei</h1>
+    <h1>Liste</h1>
+    <section></section>
+
+    <template>
+        <h2>Her kommer navnet</h2>
+    </template>
+    <script>
+        const endpoint = "https://kea-alt-del.dk/t7/api/products?limit=50"
+        const skabelon = document.querySelector("template").content;
+        const sektion = document.querySelector("section")
+
+        fetch(endpoint).then(res => res.json()).then(visListe);
+
+
+        function visListe(data) {
+            data.froEach(piece => {
+
+                console.log(piece);
+
+                const kopi = skabelon.cloneNode(true);
+                kopi.querySelector("h2").textContent = piece.productdisplayname;
+                sektion.appendChild(kopi);
+            });
+        }
+    </script>
 </body>
 
 </html>
